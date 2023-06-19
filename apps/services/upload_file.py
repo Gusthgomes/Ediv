@@ -7,7 +7,7 @@ from django.core.files.base import ContentFile
 
 class ChunkUploadedFile:
     
-    def __Init__(self, file: Union[InMemoryUploadedFile, TemporaryUploadedFile], chunk_size = 2 * 1024 * 1024):
+    def __init__(self, file: Union[InMemoryUploadedFile, TemporaryUploadedFile], chunk_size = 2 * 1024 * 1024):
         if not isinstance(file, (InMemoryUploadedFile, TemporaryUploadedFile)):
             raise UploadFileException('File must be an instance of InMemoryUploadedFile or TemporaryUpload')
         

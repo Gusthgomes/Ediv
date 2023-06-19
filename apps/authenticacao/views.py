@@ -57,7 +57,7 @@ def login(request):
         
         if auth_form.is_valid():
             if auth_form.log_into(request):
-                return redirect('/')
+                return redirect('/services/request_budget/')
             
         return render(request, 'login.html', {'auth_form': auth_form})
             
