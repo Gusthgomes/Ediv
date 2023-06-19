@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpRequest
-from.forms import RegisterForm
+from.forms import RegisterForm, AuthForm
 from django.utils.http import urlsafe_base64_decode
 from django.utils.encoding import force_str
 from .models import Users
@@ -48,4 +48,22 @@ def active_account(request, uidb4, token):
     
 @not_authenticated
 def login(request):
-    return render(request, 'login.html')  
+    if request.method == "GET":
+        auth_form = AuthForm()
+        return render(request, 'login.html', {'auth_form': auth_form})  
+    
+    elif request.method == "POST":
+        auth_form = AuthForm(request.POST)
+        
+        if auth_form.is_valid():
+            if auth_form.log_into(request):
+                return redirect('/')
+            
+        return render(request, 'login.html', {'auth_form': auth_form})
+            
+
+def logout(request):
+    request.session.flush()
+    messages.add_message(request, constants.INFO, 'Logged out!')
+    return redirect(reverse('login'))
+    
