@@ -1,6 +1,10 @@
 {% extends 'base_templates/general_base.html' %}
 {% load static %}
 
+{% block 'head' %}
+<link rel="stylesheet" href="{% static 'authentication/css/css.css' %}">
+{% endblock %}
+
 {% block 'body' %}
 
     <div class="container">
@@ -30,7 +34,7 @@
             {{HTML_FIELD | safe}}
             <br>
             <br>
-            <input type="submit" value="Enviar">
+            <input type="submit" value="Enviar" class="btn btn-main">
         </form>
     </div>
 
